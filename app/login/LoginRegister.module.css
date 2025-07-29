@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+.container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
+  align-items: stretch;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.nonContentPanel, .ContentPanel {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  box-shadow: 0 0 24px 0 rgba(0,0,0,0.04);
+  transition: transform 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.ContentPanelContent{
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    min-width: 25vw;
+}
+
+.login .nonContentPanel {
+  box-shadow: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 8vw;
+  padding-right: 4vw;
+  min-width: 340px;
+}
+
+.login .ContentPanel {
+  min-width: 400px;
+}
+
+.register .nonContentPanel {
+  min-width: 400px;
+}
+.register .ContentPanel {
+  background: #f7f8fa;
+  box-shadow: none;
+  align-items: flex-end;
+  justify-content: center;
+  padding-right: 8vw;
+  padding-left: 4vw;
+  min-width: 340px;
+}
+.ContentPanel{
+    background: #f7f8fa5b;
+}
+
+.heading1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.heading2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.welcomeText {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.nonContentPanel{
+    color: var(--background);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.2rem;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"] {
+  padding: 0.7rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: border 0.2s;
+}
+
+.form input:focus {
+  border: 1.5px solid #6c63ff;
+  outline: none;
+}
+
+.optionsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.rememberMe {
+  font-size: 0.95rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.forgot {
+  color: #6d6d6d;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.forgot:hover {
+  color: rgb(63, 63, 63);
+}
+
+.loginBtn, .createBtn { 
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+.loginBtn:hover, .createBtn:hover {
+  background: linear-gradient(135deg, #6e1653 0%, #52a0a8 100%);
+}
+
+.socialLogin {
+  margin: 2rem 0 1rem 0;
+  text-align: center;
+}
+.socialBtns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 0.7rem;
+}
+.socialGoogle, .socialMicrosoft, .socialGithub {
+  background: #f5f5f5;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.3rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.socialGoogle:hover {
+  border: 1.5px solid #a32a81;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px #551643;
+}
+.socialMicrosoft:hover {
+  border: 1.5px solid #9476b1;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px #4d3c5e;
+}
+.socialGithub:hover {
+  border: 1.5px solid rgb(132, 197, 250);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgb(50, 74, 94);
+}
+.termsLink{
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.termsLink:hover{
+  color: #424242;
+  text-decoration: underline;
+}
+.switchForm {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+}
+.registerLink, .loginLink {
+  color: #000000;
+  margin-left: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.registerLink:hover, .loginLink:hover {
+  color: #707070;
+}
+
+.terms {
+  font-size: 0.95rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    min-height: unset;
+  }
+  .nonContentPanel, .ContentPanel {
+    min-width: unset;
+    width: 100%;
+    padding: 2rem 1rem;
+    box-shadow: none;
+  }
+} 
