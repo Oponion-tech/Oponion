@@ -92,13 +92,9 @@ export default function Home() {
               (recentlyAnswered as any[]).map((survey) => (
                 <SurveyCard
                   key={survey.id}
-                  id={survey.id}
-                  title={survey.title}
-                  genre={survey.genre}
-                  votes={survey.votes}
-                  points={survey.points_reward}
-                >
-                </SurveyCard>
+                  survey={survey}
+                  className=""
+                />
               ))
             )}
           </div>
@@ -119,12 +115,9 @@ export default function Home() {
                 ) : (
                   (surveysLeftHalf as any[]).map((survey) => (
                     <SurveyCard
-                      key={survey.id}
-                      id={survey.id}
-                      title={survey.title}
-                      genre={survey.genre}
-                      votes={survey.votes}
-                      points={survey.points_reward}
+                    key={survey.id}
+                    survey={survey}
+                    className=""
                     />
                   ))
                 )}
@@ -134,14 +127,11 @@ export default function Home() {
               {surveyOfTheDay && (
                   <SurveyCard
                     key={surveyOfTheDay.id}
-                    id={surveyOfTheDay.id}
-                    title={surveyOfTheDay.title}
-                    genre={surveyOfTheDay.genre}
-                    votes={surveyOfTheDay.votes}
-                    points={surveyOfTheDay.points_reward}
+                    survey={surveyOfTheDay}
+                    icon="📋"
                     className="survey-of-the-day"
+                    children={<div className={styles["survey-of-the-day-label"]}>Survey of the Day</div>}
                   >
-                    <div className={styles["survey-of-the-day-label"]}>Survey of the Day</div>
                   </SurveyCard>
                 )}
                 {loading ? (
@@ -150,11 +140,8 @@ export default function Home() {
                   (surveysRightHalf as any[]).map((survey) => (
                     <SurveyCard
                       key={survey.id}
-                      id={survey.id}
-                      title={survey.title}
-                      genre={survey.genre}
-                      votes={survey.votes}
-                      points={survey.points_reward}
+                      survey={survey}
+                      className=""
                     />
                   ))
                 )}

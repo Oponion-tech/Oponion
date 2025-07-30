@@ -61,3 +61,45 @@ export async function getSurveyByUser(userId) {
 export async function getSurveyFromCurrentUser() {
 
 }
+
+export async function saveSurvey(surveyData) {
+  // Mock: Simuliere das Speichern einer Survey mit Fragen
+  const mockSavedSurvey = {
+    id: Math.floor(Math.random() * 1000) + 1,
+    title: surveyData.title,
+    description: surveyData.description || "Eine neue Umfrage",
+    user_id: 1, 
+    is_public: true,
+    is_anonymous: false,
+    estimated_time: surveyData.questions.length * 0.5, 
+    points_reward: surveyData.questions.length * 10, 
+    genre: surveyData.genre || "General",
+    created_at: new Date().toISOString(),
+    votes: "0",
+    questions: surveyData.questions
+  };
+  
+  console.log('Survey saved:', mockSavedSurvey);
+  return convertJsonToModel(mockSavedSurvey);
+}
+
+export async function saveSurveyAsDraft(surveyData) {
+  // Mock: Simuliere das Speichern als Entwurf
+  const mockDraftSurvey = {
+    id: `draft_${Math.floor(Math.random() * 1000) + 1}`,
+    title: surveyData.title || "Unbenannter Entwurf",
+    description: surveyData.description || "Entwurf einer Umfrage",
+    user_id: 1,
+    is_public: false,
+    is_anonymous: false,
+    estimated_time: surveyData.questions.length * 0.5,
+    points_reward: surveyData.questions.length * 10,
+    genre: surveyData.genre || "General",
+    created_at: new Date().toISOString(),
+    votes: "0",
+    questions: surveyData.questions
+  };
+  
+  console.log('Survey saved as draft:', mockDraftSurvey);
+  return convertJsonToModel(mockDraftSurvey);
+}

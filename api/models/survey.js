@@ -10,7 +10,9 @@ export class Survey {
     points_reward,
     genre,
     created_at,
-    votes
+    votes,
+    questions = [],
+    is_draft = false
   }) {
     this.id = id;
     this.title = title;
@@ -18,11 +20,13 @@ export class Survey {
     this.user_id = user_id;
     this.is_public = is_public;
     this.is_anonymous = is_anonymous;
+    this.is_draft = is_draft;
     this.estimated_time = estimated_time;
     this.points_reward = points_reward;
     this.genre = genre;
     this.created_at = created_at;
     this.votes = votes;
+    this.questions = questions;
   }
 }
 export default Survey;
@@ -40,7 +44,9 @@ export function convertJsonToModel(json) {
         points_reward: item.points || item.points_reward,
         genre: item.genre,
         created_at: item.created_at || new Date().toISOString(),
-        votes: item.votes
+        votes: item.votes,
+        questions: item.questions || [],
+        is_draft: item.is_draft || false
       }));
     }
     return new Survey({
@@ -54,6 +60,8 @@ export function convertJsonToModel(json) {
       points_reward: json.points || json.points_reward,
       genre: json.genre,
       created_at: json.created_at || new Date().toISOString(),
-      votes: json.votes
+      votes: json.votes,
+      questions: json.questions || [],
+      is_draft: json.is_draft || false
     });
   }
