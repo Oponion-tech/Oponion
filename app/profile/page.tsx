@@ -1,14 +1,11 @@
-'use client';
+"use client";
 
-import Navbar from "../components/Navbar";
+import { MainLayout } from "@/components/layout";
 
 export default function ProfilePage() {
   return (
-    <div>
-      <Navbar />
-      <div style={{padding: '2rem'}}>
-        <h1>My Profile</h1>
-      </div>
-    </div>
+    <MainLayout title="My Profile">
+      <div>{/* Future profile content */}</div>
+    </MainLayout>
   );
-} 
+}

@@ -1,14 +1,11 @@
-'use client';
+"use client";
 
-import Navbar from "../components/Navbar";
+import { MainLayout } from "@/components/layout";
 
 export default function PointsRewardsPage() {
   return (
-    <div>
-      <Navbar />
-      <div style={{padding: '2rem'}}>
-        <h1>Points & Rewards</h1>
-      </div>
-    </div>
+    <MainLayout title="Points & Rewards">
+      <div>{/* Future points & rewards content */}</div>
+    </MainLayout>
   );
-} 
+}

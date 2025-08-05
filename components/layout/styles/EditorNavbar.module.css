@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.editorNavbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: white;
+  border-bottom: 1px solid var(--border-gray);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brandName {
+  font-size: 1.5rem;
+  color: var(--foreground);
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.navbarRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.closeButton {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--border-gray);
+  background: white;
+  color: var(--text-gray);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: var(--secondary-gray);
+  border-color: var(--text-gray);
+  transform: translateY(-1px);
+}
+
+.saveButton {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(164, 36, 125, 0.3);
+}
+
+.saveButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(164, 36, 125, 0.4);
+}

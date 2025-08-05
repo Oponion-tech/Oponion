@@ -1,14 +1,11 @@
-'use client';
+"use client";
 
-import Navbar from "../components/Navbar";
+import { MainLayout } from "@/components/layout";
 
 export default function TermsPage() {
   return (
-    <div>
-      <Navbar />
-      <div style={{padding: '2rem'}}>
-        <h1>Terms and Conditions</h1>
-      </div>
-    </div>
+    <MainLayout title="Terms and Conditions">
+      <div>{/* Future terms content */}</div>
+    </MainLayout>
   );
-} 
+}

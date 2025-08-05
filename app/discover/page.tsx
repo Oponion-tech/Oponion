@@ -1,14 +1,11 @@
-'use client';
+"use client";
 
-import Navbar from "../components/Navbar";
+import { MainLayout } from "@/components/layout";
 
 export default function DiscoverPage() {
   return (
-    <div>
-      <Navbar />
-      <div style={{padding: '2rem'}}>
-        <h1>Discover</h1>
-      </div>
-    </div>
+    <MainLayout title="Discover">
+      <div>{/* Future discover content */}</div>
+    </MainLayout>
   );
-} 
+}

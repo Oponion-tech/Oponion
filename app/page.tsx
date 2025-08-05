@@ -1,11 +1,14 @@
-'use client';
-import Navbar from "./components/Navbar";
+"use client";
+import { Navbar } from "@/components/layout";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
-import styles from './components/SurveyCard.module.css';
 import Image from "next/image";
-import SurveyCard from "./components/SurveyCard";
-import { getDiscorverSurveys, getRecentAnsweredSurveys, getSurveyOfTheDay } from "../api/services/surveyService";
+import { SurveyCard } from "@/components/survey";
+import {
+  getDiscorverSurveys,
+  getRecentAnsweredSurveys,
+  getSurveyOfTheDay,
+} from "../api/services/surveyService";
 import { getUserInformation } from "../api/services/userInformationService";
 import { useRouter } from "next/navigation";
 
@@ -24,26 +27,29 @@ export default function Home() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [discoverData, recentData, userData, surveyOfTheDayData] = await Promise.all([
-          getDiscorverSurveys(),
-          getRecentAnsweredSurveys(),
-          getUserInformation(),
-          getSurveyOfTheDay()
-        ]);
+        const [discoverData, recentData, userData, surveyOfTheDayData] =
+          await Promise.all([
+            getDiscorverSurveys(),
+            getRecentAnsweredSurveys(),
+            getUserInformation(),
+            getSurveyOfTheDay(),
+          ]);
         setDiscoverSurveys(discoverData);
         setRecentlyAnswered(recentData);
         setUserInfo(userData);
         setSurveyOfTheDay(surveyOfTheDayData);
-        
-        const totalSurveys = Array.isArray(discoverData) ? discoverData.length : 0;
+
+        const totalSurveys = Array.isArray(discoverData)
+          ? discoverData.length
+          : 0;
         const leftHalfCount = Math.ceil(totalSurveys * 0.625);
-        
+
         if (Array.isArray(discoverData)) {
           setSurveysLeftHalf(discoverData.slice(0, leftHalfCount));
           setSurveysRightHalf(discoverData.slice(leftHalfCount));
         }
       } catch (error) {
-        console.error('Error loading data:', error);
+        console.error("Error loading data:", error);
       } finally {
         setLoading(false);
       }
@@ -52,11 +58,13 @@ export default function Home() {
     loadData();
   }, []);
 
-
   // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setDropdownOpen(false);
       }
     }
@@ -69,85 +77,77 @@ export default function Home() {
   }, [dropdownOpen]);
 
   return (
-    <div >
+    <div>
       <Navbar />
       {/* Hero Section */}
       <div className="hero-section-container">
-      <section className="hero-section">
-        <div className="hero-content">
-          <div className="hero-left">
-            <h1 className="hero-greeting">
-              Hi {userInfo ? userInfo.name : 'User'}!
-            </h1>
-            <p className="hero-subtitle">Ready for new surveys?</p>
-            <button className="create-survey-btn" onClick={() => router.push('/create')}>
-              Create Survey
-            </button>
+        <section className="hero-section">
+          <div className="hero-content">
+            <div className="hero-left">
+              <h1 className="hero-greeting">
+                Hi {userInfo ? userInfo.name : "User"}!
+              </h1>
+              <p className="hero-subtitle">Ready for new surveys?</p>
+              <button
+                className="create-survey-btn"
+                onClick={() => router.push("/create")}
+              >
+                Create Survey
+              </button>
+            </div>
+            <div className="recently-answered">
+              <h3>Recently Answered</h3>
+              {loading ? (
+                <p>Loading recent surveys...</p>
+              ) : (
+                (recentlyAnswered as any[]).map((survey) => (
+                  <SurveyCard key={survey.id} survey={survey} className="" />
+                ))
+              )}
+            </div>
           </div>
-          <div className="recently-answered">
-            <h3>Recently Answered</h3>
-            {loading ? (
-              <p>Loading recent surveys...</p>
-            ) : (
-              (recentlyAnswered as any[]).map((survey) => (
-                <SurveyCard
-                  key={survey.id}
-                  survey={survey}
-                  className=""
-                />
-              ))
-            )}
-          </div>
-        </div>
-      </section>
+        </section>
       </div>
       {/* Discover Section */}
       <section className="discover-section">
         <div className="discover-container">
           <div className="discover-header">
             <h2 className="discover-title">Discover</h2>
-            <p className="discover-subtitle">Explore trending surveys and share your opinion</p>
+            <p className="discover-subtitle">
+              Explore trending surveys and share your opinion
+            </p>
           </div>
-            <div className="survey-container">
-              <div className="survey-left-container">
+          <div className="survey-container">
+            <div className="survey-left-container">
               {loading ? (
-                  <p>Loading surveys...</p>
-                ) : (
-                  (surveysLeftHalf as any[]).map((survey) => (
-                    <SurveyCard
-                    key={survey.id}
-                    survey={survey}
-                    className=""
-                    />
-                  ))
-                )}
-
-              </div>
-              <div className="survey-right-container">
+                <p>Loading surveys...</p>
+              ) : (
+                (surveysLeftHalf as any[]).map((survey) => (
+                  <SurveyCard key={survey.id} survey={survey} className="" />
+                ))
+              )}
+            </div>
+            <div className="survey-right-container">
               {surveyOfTheDay && (
-                  <SurveyCard
-                    key={surveyOfTheDay.id}
-                    survey={surveyOfTheDay}
-                    icon="📋"
-                    className="survey-of-the-day"
-                    children={<div className={styles["survey-of-the-day-label"]}>Survey of the Day</div>}
-                  >
-                  </SurveyCard>
-                )}
-                {loading ? (
-                  <p>Loading surveys...</p>
-                ) : (
-                  (surveysRightHalf as any[]).map((survey) => (
-                    <SurveyCard
-                      key={survey.id}
-                      survey={survey}
-                      className=""
-                    />
-                  ))
-                )}
-              </div>
+                <SurveyCard
+                  key={surveyOfTheDay.id}
+                  survey={surveyOfTheDay}
+                  icon="📋"
+                  className="survey-of-the-day"
+                  showDayLabel={true}
+                  dayLabelText="Survey of the Day"
+                />
+              )}
+              {loading ? (
+                <p>Loading surveys...</p>
+              ) : (
+                (surveysRightHalf as any[]).map((survey) => (
+                  <SurveyCard key={survey.id} survey={survey} className="" />
+                ))
+              )}
             </div>
           </div>
+        </div>
       </section>
     </div>
   );

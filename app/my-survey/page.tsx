@@ -1,14 +1,11 @@
-'use client';
+"use client";
 
-import Navbar from "../components/Navbar";
+import { MainLayout } from "@/components/layout";
 
 export default function MySurveyPage() {
   return (
-    <div>
-      <Navbar />
-      <div style={{padding: '2rem'}}>
-        <h1>My Survey</h1>
-      </div>
-    </div>
+    <MainLayout title="My Survey">
+      <div>{/* Future my survey content */}</div>
+    </MainLayout>
   );
-} 
+}

@@ -1,14 +1,11 @@
-'use client';
+"use client";
 
-import Navbar from "../components/Navbar";
+import { MainLayout } from "@/components/layout";
 
 export default function SubscriptionPage() {
   return (
-    <div>
-      <Navbar />
-      <div style={{padding: '2rem'}}>
-        <h1>Subscription</h1>
-      </div>
-    </div>
+    <MainLayout title="Subscription">
+      <div>{/* Future subscription content */}</div>
+    </MainLayout>
   );
-} 
+}

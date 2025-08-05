@@ -1,0 +1,164 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.2rem;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"] {
+  padding: 0.7rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: border 0.2s;
+}
+
+.form input:focus {
+  border: 1.5px solid #6c63ff;
+  outline: none;
+}
+
+.optionsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.rememberMe {
+  font-size: 0.95rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.forgot {
+  color: #6d6d6d;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.forgot:hover {
+  color: rgb(63, 63, 63);
+}
+
+.loginBtn, 
+.createBtn { 
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+
+.loginBtn:hover, 
+.createBtn:hover {
+  background: linear-gradient(135deg, #6e1653 0%, #52a0a8 100%);
+}
+
+.socialLogin {
+  margin: 2rem 0 1rem 0;
+  text-align: center;
+}
+
+.socialBtns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 0.7rem;
+}
+
+.socialGoogle, 
+.socialMicrosoft, 
+.socialGithub {
+  background: #f5f5f5;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.3rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialGoogle:hover {
+  border: 1.5px solid #a32a81;
+  color: #fff;
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #a32a81 0%, #7DF2FF 100%);
+}
+
+.socialMicrosoft:hover {
+  border: 1.5px solid #a32a81;
+  color: #fff;
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #a32a81 0%, #7DF2FF 100%);
+}
+
+.socialGithub:hover {
+  border: 1.5px solid #a32a81;
+  color: #fff;
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #a32a81 0%, #7DF2FF 100%);
+}
+
+.switchForm {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.registerLink, 
+.loginLink {
+  color: #a32a81;
+  margin-left: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.registerLink:hover, 
+.loginLink:hover {
+  color: #707070;
+}
+
+.terms {
+  font-size: 0.95rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.heading2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.termsLink {
+  color: #a32a81;
+  text-decoration: none;
+  font-weight: 600;
+}

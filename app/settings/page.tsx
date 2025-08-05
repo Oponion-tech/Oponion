@@ -1,14 +1,11 @@
-'use client';
+"use client";
 
-import Navbar from "../components/Navbar";
+import { MainLayout } from "@/components/layout";
 
 export default function SettingsPage() {
   return (
-    <div>
-      <Navbar />
-      <div style={{padding: '2rem'}}>
-        <h1>Settings</h1>
-      </div>
-    </div>
+    <MainLayout title="Settings">
+      <div>{/* Future settings content */}</div>
+    </MainLayout>
   );
-} 
+}
