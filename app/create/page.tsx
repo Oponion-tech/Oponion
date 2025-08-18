@@ -20,6 +20,7 @@ export default function CreatePage() {
   const [surveyTitle, setSurveyTitle] = useState<string>('');
   const [timeLimit, setTimeLimit] = useState<number>(0); // 0 = kein Zeitlimit
   const [points, setPoints] = useState<number>(100); // Standard 100 Punkte (Minimum)
+  const [anonymousAnswers, setAnonymousAnswers] = useState<boolean>(false); // Anonyme Antworten
   const [showSurveySettings, setShowSurveySettings] = useState<boolean>(false); // Einstellungen einklappbar
   const [currentQuestion, setCurrentQuestion] = useState<QuestionInterface>({
     id: '1',
@@ -487,14 +488,23 @@ export default function CreatePage() {
                     <div className={styles.settingItem}>
                       <label>Punkte für Teilnahme:</label>
                       <div className={styles.pointsInputContainer}>
-                        <input
-                          type="number"
-                          min="100"
-                          max="1000"
-                          value={points}
-                          onChange={(e) => setPoints(parseInt(e.target.value) || 100)}
-                          placeholder="Auto"
-                        />
+                                                 <input
+                           type="number"
+                           min="100"
+                           max="1000"
+                           value={points}
+                           onChange={(e) => {
+                             const value = parseInt(e.target.value) || 0;
+                             setPoints(value);
+                           }}
+                           onBlur={(e) => {
+                             const value = parseInt(e.target.value) || 0;
+                             if (value < 100) {
+                               setPoints(100);
+                             }
+                           }}
+                           placeholder="Auto"
+                         />
                         <button 
                           className={styles.autoButton}
                           onClick={() => setPoints(calculatePoints(questions.length))}
@@ -506,6 +516,17 @@ export default function CreatePage() {
                       <span className={styles.settingHint}>
                         {points} Punkte (Auto: {calculatePoints(questions.length)}P)
                       </span>
+                    </div>
+                    <div className={styles.settingItem}>
+                      <div className={styles.settingCheckboxContainer}>
+                        <input
+                          type="checkbox"
+                          checked={anonymousAnswers}
+                          onChange={(e) => setAnonymousAnswers(e.target.checked)}
+                          className={styles.settingCheckbox}
+                        />
+                        <span>Anonyme Antworten erlauben</span>
+                    </div>
                     </div>
                   </div>
                 </div>

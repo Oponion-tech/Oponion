@@ -27,6 +27,19 @@ export async function getSurveyOfTheDay() {
   return survey;
 }
 
+export async function getHighestPointsValue(){
+  return 1000;
+}
+export async function getHighestVotesValue(){
+  return 10000;
+}
+export async function getLowestPointsValue(){
+  return 0;
+}
+export async function getLowestVotesValue(){
+  return 0;
+}
+
 export async function getSurveyById(id) {
 
 }
@@ -52,6 +65,167 @@ export async function getDiscorverSurveys() {
   ];
 
   var surveys = convertJsonToModel(mockSurveys);
+  return surveys;
+}
+
+// Neue Pagination-Funktionen
+export async function getPaginatedSurveys(page = 1, limit = 20, filters = {}) {
+  // Mock: Simuliere große Anzahl von Umfragen
+  const allMockSurveys = generateMockSurveys(100); // 100 Mock-Umfragen
+  
+  // Filter anwenden
+  let filteredSurveys = applyFilters(allMockSurveys, filters);
+  
+  // Sortierung anwenden
+  if (filters.sortBy) {
+    filteredSurveys = sortSurveys(filteredSurveys, filters.sortBy, filters.sortOrder || 'desc');
+  }
+  
+  // Pagination berechnen
+  const totalCount = filteredSurveys.length;
+  const totalPages = Math.ceil(totalCount / limit);
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const paginatedSurveys = filteredSurveys.slice(startIndex, endIndex);
+  
+  // Mock-API Response Format
+  const response = {
+    surveys: convertJsonToModel(paginatedSurveys),
+    pagination: {
+      currentPage: page,
+      totalPages: totalPages,
+      totalCount: totalCount,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1
+    }
+  };
+  
+  return response;
+}
+
+// Hilfsfunktion: Filter anwenden
+function applyFilters(surveys, filters) {
+  let filtered = [...surveys];
+  
+  // Text-Suche
+  if (filters.searchTerm) {
+    const searchLower = filters.searchTerm.toLowerCase();
+    filtered = filtered.filter(survey => 
+      survey.title.toLowerCase().includes(searchLower) ||
+      survey.genre.toLowerCase().includes(searchLower)
+    );
+  }
+  
+  // Kategorien
+  if (filters.categories && filters.categories.length > 0) {
+    filtered = filtered.filter(survey => 
+      filters.categories.includes(survey.genre)
+    );
+  }
+  
+  // Punkte-Bereich
+  if (filters.pointsRange) {
+    filtered = filtered.filter(survey => 
+      survey.points >= filters.pointsRange[0] && 
+      survey.points <= filters.pointsRange[1]
+    );
+  }
+  
+  // Stimmen-Bereich
+  if (filters.votesRange) {
+    filtered = filtered.filter(survey => 
+      survey.votes >= filters.votesRange[0] && 
+      survey.votes <= filters.votesRange[1]
+    );
+  }
+  
+  return filtered;
+}
+
+// Hilfsfunktion: Umfragen sortieren
+function sortSurveys(surveys, sortBy, sortOrder) {
+  const sorted = [...surveys];
+  
+  sorted.sort((a, b) => {
+    let aValue, bValue;
+    
+    switch (sortBy) {
+      case 'votes':
+        // Konvertiere "1.2k" zu 1200 für Sortierung
+        aValue = parseVoteString(a.votes);
+        bValue = parseVoteString(b.votes);
+        break;
+      case 'points':
+        aValue = a.points || 0;
+        bValue = b.points || 0;
+        break;
+      case 'created_at':
+        aValue = new Date(a.created_at || 0);
+        bValue = new Date(b.created_at || 0);
+        break;
+      case 'estimated_time':
+        aValue = a.estimated_time || 0;
+        bValue = b.estimated_time || 0;
+        break;
+      default:
+        return 0;
+    }
+    
+    if (sortOrder === 'asc') {
+      return aValue > bValue ? 1 : -1;
+    } else {
+      return aValue < bValue ? 1 : -1;
+    }
+  });
+  
+  return sorted;
+}
+
+// Hilfsfunktion: Vote-String zu Nummer konvertieren (z.B. "1.2k" -> 1200)
+function parseVoteString(voteStr) {
+  if (typeof voteStr === 'number') return voteStr;
+  if (typeof voteStr !== 'string') return 0;
+  
+  const lower = voteStr.toLowerCase();
+  if (lower.includes('k')) {
+    return parseFloat(lower.replace('k', '')) * 1000;
+  } else if (lower.includes('m')) {
+    return parseFloat(lower.replace('m', '')) * 1000000;
+  } else {
+    return parseInt(voteStr) || 0;
+  }
+}
+
+// Hilfsfunktion: Mehr Mock-Umfragen generieren
+function generateMockSurveys(count) {
+  const genres = ["Technology", "Entertainment", "Food & Drink", "Gaming", "Social Media", "Fitness", "Education", "Travel", "Music", "Sports"];
+  const surveys = [];
+  
+  // Verwende einen höheren Startwert für IDs um Konflikte zu vermeiden
+  const startId = 1000;
+  
+  for (let i = 0; i < count; i++) {
+    const genre = genres[Math.floor(Math.random() * genres.length)];
+    const points = Math.floor(Math.random() * 1000) + 50;
+    const votes = Math.floor(Math.random() * 10000) + 100;
+    
+    // Generiere zufällige Datum in den letzten 30 Tagen
+    const randomDaysAgo = Math.floor(Math.random() * 30);
+    const created_at = new Date(Date.now() - randomDaysAgo * 24 * 60 * 60 * 1000).toISOString();
+    
+    surveys.push({
+      id: startId + i, // Eindeutige ID
+      title: `${genre} Related Question`,
+      description: `This is a sample survey about ${genre.toLowerCase()} for testing pagination.`,
+      user_id: Math.floor(Math.random() * 200) + 100,
+      genre: genre,
+      votes: votes,
+      points: points,
+      estimated_time: Math.floor(Math.random() * 5) + 1,
+      created_at: created_at
+    });
+  }
+  
   return surveys;
 }
 

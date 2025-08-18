@@ -1,0 +1,149 @@
+/* CSS Variables for RangeSlider */
+:root {
+  --foreground: #1a1a1a;
+  --text-gray: #666;
+  --border-gray: #e0e0e0;
+  --secondary-gray: #f8f9fa;
+  --primary-pink: #a4247d;
+  --primary-blue: #7df2ff;
+}
+
+/* jQuery UI Range Slider Styling */
+.rangeSliderSection {
+  margin-bottom: 2rem;
+}
+
+.rangeSliderSection h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+}
+
+.rangeSliderWrapper {
+  background: var(--secondary-gray);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-gray);
+}
+
+.rangeValues {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--text-gray);
+}
+
+.rangeValues span {
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-gray);
+  font-size: 0.9rem;
+}
+
+.jquerySlider {
+  height: 20px;
+  margin: 0 10px;
+}
+
+/* jQuery UI Slider Custom Styling */
+.jquerySlider .ui-slider-range {
+  background: linear-gradient(90deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
+  border-radius: 4px;
+}
+
+.jquerySlider .ui-slider-handle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid white;
+  background: var(--primary-pink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  top: -2px;
+}
+
+.jquerySlider .ui-slider-handle:nth-child(2) {
+  background: var(--primary-blue);
+}
+
+.jquerySlider .ui-slider-handle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.jquerySlider .ui-slider-track {
+  background: var(--border-gray);
+  border-radius: 4px;
+  height: 8px;
+  border: none;
+}
+
+/* jQuery UI Slider Base Styles */
+.jquerySlider .ui-slider {
+  position: relative;
+  text-align: left;
+  background: var(--border-gray);
+  border-radius: 4px;
+  height: 8px;
+  border: none;
+}
+
+.jquerySlider .ui-slider .ui-slider-handle {
+  position: absolute;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 3px solid white;
+  background: var(--primary-pink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  top: -8px;
+}
+
+.jquerySlider .ui-slider .ui-slider-handle:nth-child(2) {
+  background: var(--primary-blue);
+}
+
+.jquerySlider .ui-slider .ui-slider-handle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.jquerySlider .ui-slider .ui-slider-range {
+  position: absolute;
+  z-index: 1;
+  font-size: .7em;
+  display: block;
+  border: 0;
+  background: linear-gradient(90deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
+  border-radius: 4px;
+  height: 8px;
+  top: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rangeSliderWrapper {
+    padding: 1rem;
+  }
+  
+  .rangeValues {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .jquerySlider .ui-slider-handle {
+    width: 20px;
+    height: 20px;
+  }
+}
+  

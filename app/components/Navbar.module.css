@@ -106,15 +106,14 @@
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  min-width: 220px;
+  min-width: 240px;
   z-index: 1000;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
   font-size: 1rem;
 }
 
 .dropdownHeader {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.75rem 1.25rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -126,33 +125,50 @@
   font-weight: 600;
   font-family: 'Orbitron', sans-serif;
   text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
 .dropdownPoints {
-  font-size: 0.95rem;
-  color: #888;
+  font-size: 0.9rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .dropdownLink {
   display: block;
-  padding-left:  1rem;
+  padding: 0.1rem 1.25rem;
   text-decoration: none;
-  color: #222;
+  color: #374151;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: 0;
+}
+
+.dropdownLink:hover {
+  background-color: #f9fafb;
+  color: var(--foreground);
+  transform: translateX(4px);
 }
 
 .dropdownDivider {
-  border-top: 1px solid #eee;
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
+  border-top: 1px solid #f3f4f6;
+  margin: 0.3rem 0;
 }
 
 .dropdownLogout {
   display: block;
-  width: 100%;
+  width: 80%;
   background: none;
   border: none;
-  color: var(--foreground); 
-  padding-left: 1rem;
+  color: #dc2626;
+  padding: 0.1rem 1.25rem;
+  font-size: 0.9rem;
   text-align: left;
   cursor: pointer;
-} 
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: 0;
+}
