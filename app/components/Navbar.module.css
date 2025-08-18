@@ -65,6 +65,11 @@
   font-weight: 600;
   transition: background 0.2s, color 0.2s;
 }
+.nav-link.active:hover{
+  color: rgb(196, 196, 196) !important;
+  -webkit-text-fill-color: rgb(196, 196, 196) !important;
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
+}
 
 .search-bar {
   display: flex;
