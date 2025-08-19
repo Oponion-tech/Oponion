@@ -80,20 +80,30 @@ export default function Navbar() {
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.documentElement.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      // Restore scrolling
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.documentElement.style.overflow = "";
     }
 
     // Cleanup on unmount
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.documentElement.style.overflow = "";
     };
   }, [mobileMenuOpen]);
 
   // Close mobile menu when window is resized to desktop size
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 1023 && mobileMenuOpen) {
+      if (window.innerWidth > 1024 && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
     };
@@ -111,46 +121,47 @@ export default function Navbar() {
   return (
     <div className={styles["navbar-wrapper"]}>
       <nav className={styles.navbar}>
-        <Link href="/" className={styles["navbar-brand"]}>
-          <div className={styles["navbar-logo"]}>
-            <Image src="/logo.png" alt="Oponion Logo" width={32} height={32} />
+        {/* Left Side: Logo + Navigation */}
+        <div className={styles["navbar-left"]}>
+          <Link href="/" className={styles["navbar-brand"]}>
+            <div className={styles["navbar-logo"]}>
+              <Image
+                src="/logo.png"
+                alt="Oponion Logo"
+                width={32}
+                height={32}
+              />
+            </div>
+            OPONION
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className={styles["navbar-nav"]}>
+            <Link
+              href="/discover"
+              className={
+                styles["nav-link"] +
+                (pathname === "/discover" ? " " + styles["active"] : "")
+              }
+            >
+              <FiCompass className={styles["nav-icon"]} />
+              Discover
+            </Link>
+            <Link
+              href="/create"
+              className={
+                styles["nav-link"] +
+                (pathname === "/create" ? " " + styles["active"] : "")
+              }
+            >
+              <FiPlus className={styles["nav-icon"]} />
+              Create
+            </Link>
           </div>
-          OPONION
-        </Link>
+        </div>
 
-        {/* Desktop Navigation */}
-        <div className={styles["navbar-nav"]}>
-          <Link
-            href="/"
-            className={
-              styles["nav-link"] +
-              (pathname === "/" ? " " + styles["active"] : "")
-            }
-          >
-            <FiHome className={styles["nav-icon"]} />
-            Home
-          </Link>
-          <Link
-            href="/discover"
-            className={
-              styles["nav-link"] +
-              (pathname === "/discover" ? " " + styles["active"] : "")
-            }
-          >
-            <FiCompass className={styles["nav-icon"]} />
-            Discover
-          </Link>
-          <Link
-            href="/create"
-            className={
-              styles["nav-link"] +
-              (pathname === "/create" ? " " + styles["active"] : "")
-            }
-          >
-            <FiPlus className={styles["nav-icon"]} />
-            Create
-          </Link>
-
+        {/* Right Side: Search + Profile */}
+        <div className={styles["navbar-right"]}>
           {/* Desktop Search */}
           <div className={styles["mobile-search"]}>
             <FiSearch className={styles["mobile-search-icon"]} />
@@ -289,15 +300,6 @@ export default function Navbar() {
               {/* Mobile Navigation Links */}
               <div className={styles["mobile-nav-links"]}>
                 <Link
-                  href="/"
-                  className={`${styles["mobile-nav-link"]} ${
-                    pathname === "/" ? styles["active"] : ""
-                  }`}
-                >
-                  <FiHome className={styles["mobile-nav-icon"]} />
-                  Home
-                </Link>
-                <Link
                   href="/discover"
                   className={`${styles["mobile-nav-link"]} ${
                     pathname === "/discover" ? styles["active"] : ""
@@ -315,18 +317,6 @@ export default function Navbar() {
                   <FiPlus className={styles["mobile-nav-icon"]} />
                   Create
                 </Link>
-
-                <div className={styles["mobile-divider"]}></div>
-
-                {/* Mobile Search */}
-                <div className={styles["mobile-search"]}>
-                  <FiSearch className={styles["mobile-search-icon"]} />
-                  <input
-                    type="text"
-                    placeholder="Search surveys..."
-                    className={styles["mobile-search-input"]}
-                  />
-                </div>
 
                 <div className={styles["mobile-divider"]}></div>
 
